@@ -15,5 +15,13 @@ namespace F10Y.L0020
             => builder.Arguments_ByArgumentName.Add(
                 argumentName,
                 argument);
+
+        public void Add_Argument(
+            ICommandArgumentsBuilder builder,
+            INamedArgument argument)
+            => this.Add_Argument(
+                builder,
+                argument.Name,
+                argument.Argument);
     }
 }

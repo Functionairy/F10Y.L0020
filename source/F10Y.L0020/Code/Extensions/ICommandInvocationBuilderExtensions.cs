@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace F10Y.L0020
+namespace F10Y.L0020.Extensions
 {
     public static class ICommandInvocationBuilderExtensions
     {

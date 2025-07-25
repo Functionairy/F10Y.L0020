@@ -43,6 +43,26 @@ namespace F10Y.L0020
                 lines);
         }
 
+        public async Task Describe_ToFile(
+            CommandResult commandResult,
+            string textFilePath,
+            CommandInvocation command)
+        {
+            var command_Lines = Instances.CommandInvocationOperator.Describe_ToLines(command)
+                .Append_BlankLine()
+                ;
+
+            var result_Lines = this.Describe(commandResult);
+
+            var lines_ForOutput = Instances.EnumerableOperator.From(
+                command_Lines,
+                result_Lines);
+
+            await Instances.FileOperator.Write_Lines(
+                textFilePath,
+                lines_ForOutput);
+        }
+
         public void Describe_ToTextWriter_Synchronous(
             CommandResult commandResult,
             TextWriter textWriter)
