@@ -13,7 +13,7 @@ namespace F10Y.L0020
     [FunctionsMarker]
     public partial interface ICommandResultOperator
     {
-        public IEnumerable<string> Describe(CommandResult commandResult)
+        IEnumerable<string> Describe(CommandResult commandResult)
         {
             var lines = Instances.EnumerableOperator.New<string>()
                 .Append($"{commandResult.ExitCode}: exit code")
@@ -27,12 +27,12 @@ namespace F10Y.L0020
             return lines;
         }
 
-        public void Describe_ToConsole_Synchronous(CommandResult commandResult)
+        void Describe_ToConsole_Synchronous(CommandResult commandResult)
             => this.Describe_ToTextWriter_Synchronous(
                 commandResult,
                 Instances.Values.Console_Out);
 
-        public async Task Describe_ToFile(
+        async Task Describe_ToFile(
             CommandResult commandResult,
             string textFilePath)
         {
@@ -43,7 +43,7 @@ namespace F10Y.L0020
                 lines);
         }
 
-        public async Task Describe_ToFile(
+        async Task Describe_ToFile(
             CommandResult commandResult,
             string textFilePath,
             CommandInvocation command)
@@ -63,7 +63,7 @@ namespace F10Y.L0020
                 lines_ForOutput);
         }
 
-        public void Describe_ToTextWriter_Synchronous(
+        void Describe_ToTextWriter_Synchronous(
             CommandResult commandResult,
             TextWriter textWriter)
         {
@@ -74,7 +74,7 @@ namespace F10Y.L0020
                 lines);
         }
 
-        public CommandResult Get_From(
+        CommandResult Get_From(
             string[] outputLines,
             string[] errorLines,
             int exitCode,
@@ -85,14 +85,22 @@ namespace F10Y.L0020
                 exitCode,
                 duration);
 
-        public N001.CommandResult Get_From(
+        N001.CommandResult Get_From(
             int exitCode,
             TimeSpan duration)
             => new N001.CommandResult(
                 exitCode,
                 duration);
 
-        public bool Is_Success(CommandResult commandResult)
+        bool Is_Failure(CommandResult commandResult)
+        {
+            var is_Success = this.Is_Success(commandResult);
+
+            var output = Instances.BooleanOperator.Invert(is_Success);
+            return output;
+        }
+
+        bool Is_Success(CommandResult commandResult)
         {
             var output = Instances.ExitCodeOperator.Is_Success(
                 commandResult.ExitCode);
