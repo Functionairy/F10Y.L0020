@@ -1,5 +1,4 @@
 using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -9,6 +8,9 @@ using F10Y.T0011;
 
 namespace F10Y.L0020
 {
+    /// <summary>
+    /// Functions to run commands on arguments that return a <see cref="CommandResult"/> instance to allow examining the execution of a command.
+    /// </summary>
     [FunctionsMarker]
     public partial interface ICommandLineOperator :
         L0000.ICommandLineOperator
