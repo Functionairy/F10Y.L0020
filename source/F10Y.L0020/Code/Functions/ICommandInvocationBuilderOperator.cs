@@ -9,7 +9,7 @@ namespace F10Y.L0020
     [FunctionsMarker]
     public partial interface ICommandInvocationBuilderOperator
     {
-        public CommandInvocation Build_CommandInvocation(ICommandInvocationBuilder commandInvocationBuilder)
+        CommandInvocation Build_CommandInvocation(ICommandInvocationBuilder commandInvocationBuilder)
         {
             var argumentTexts = commandInvocationBuilder.Arguments_ByArgumentName
                 .Select(pair => pair.Value.Get_ArgumentText())
@@ -29,14 +29,17 @@ namespace F10Y.L0020
             return output;
         }
 
-        public TCommandInvocationBuilder New<TCommandInvocationBuilder>()
+        TCommandInvocationBuilder New<TCommandInvocationBuilder>()
             where TCommandInvocationBuilder : ICommandInvocationBuilder, new()
             => new TCommandInvocationBuilder();
 
-        public CommandInvocationBuilder New()
+        CommandInvocationBuilder New()
             => this.New<CommandInvocationBuilder>();
 
-        public void Set_Command(
+        /// <summary>
+        /// Set the command (either executable file path, or executable name on the search path).
+        /// </summary>
+        void Set_Command(
             ICommandInvocationBuilder builder,
             string command)
             => builder.Command = command;

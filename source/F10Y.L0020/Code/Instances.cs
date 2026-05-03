@@ -5,7 +5,10 @@ namespace F10Y.L0020
 {
     public static class Instances
     {
+        public static IArgumentNames ArgumentNames => L0020.ArgumentNames.Instance;
+        public static IArgumentOperator ArgumentOperator => L0020.ArgumentOperator.Instance;
         public static L0000.IBooleanOperator BooleanOperator => L0000.BooleanOperator.Instance;
+        public static F10Y.L0000.ICharacters Characters => F10Y.L0000.Characters.Instance;
         public static ICommandArgumentsBuilderOperator CommandArgumentsBuilderOperator => L0020.CommandArgumentsBuilderOperator.Instance;
         public static ICommandInvocationBuilderOperator CommandInvocationBuilderOperator => L0020.CommandInvocationBuilderOperator.Instance;
         public static ICommandInvocationOperator CommandInvocationOperator => L0020.CommandInvocationOperator.Instance;
